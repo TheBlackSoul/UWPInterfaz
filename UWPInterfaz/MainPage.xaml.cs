@@ -25,6 +25,51 @@ namespace UWPInterfaz
         public MainPage()
         {
             this.InitializeComponent();
+            BackButton.Visibility = Visibility.Collapsed;
+            MyFrame.Navigate(typeof(Hotel));
+            TitleTextBlock.Text = "Hotel";
+            Hotel.IsSelected = true;
+        }
+
+        private void IconListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+      
+
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MyFrame.CanGoBack)
+            {
+                MyFrame.GoBack();
+                Hotel.IsSelected = true;
+            }
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Hotel.IsSelected)
+            {
+                BackButton.Visibility = Visibility.Collapsed;
+                MyFrame.Navigate(typeof(Hotel));
+                TitleTextBlock.Text = "Hotel";
+            }
+            else if (Banco.IsSelected)
+            {
+                BackButton.Visibility = Visibility.Visible;
+                MyFrame.Navigate(typeof(Banco));
+                TitleTextBlock.Text = "Banco";
+            } else if (Controles.IsSelected) {
+                BackButton.Visibility = Visibility.Visible;
+                MyFrame.Navigate(typeof(Controls));
+                TitleTextBlock.Text = "Controles";
+            }
         }
     }
 }
